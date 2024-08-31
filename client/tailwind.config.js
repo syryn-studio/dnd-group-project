@@ -5,12 +5,22 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        unifraktur: ['UnifrakturCook', 'cursive'],
+        inter: ['Inter', 'sans-serif'],
+      },
+    },
   },
   plugins: [
     require('daisyui')],
   daisyui: {
-    themes: ["dim"],
+    themes: [{
+      mytheme: {
+        "primary": "#FDA837",
+      }
+    }],
+    darkTheme: true
   },
 }
 
