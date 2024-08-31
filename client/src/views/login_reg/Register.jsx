@@ -13,6 +13,11 @@ const Register = () => {
                     // filter: "blur(2px)",
                     zIndex: "-1",
                 }}></div>
+            <div
+                className="absolute inset-0 bg-black opacity-50"
+                style={{
+                    zIndex: "-1",
+                }}></div>
             <div className=" h-screen flex items-center justify-center">
                 <div className="flex-col">
                     <h1 className="text-6xl mb-8 text-white font-unifraktur">
