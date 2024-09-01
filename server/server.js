@@ -3,6 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import dbConnect from './config/mongoose.config.js';
 import UserRouter from './routes/user.routes.js';
+import CampaignRouter from './routes/campaign.routes.js';
+import NoteRouter from './routes/note.routes.js';
 import cookieParser from 'cookie-parser';
 
 dotenv.config();
@@ -12,6 +14,8 @@ const PORT = process.env.Port
 app.use(cookieParser(), express.json(), cors({ "credentials": true, "origin": "http://localhost:5173" }));
 dbConnect();
 app.use('/api/users', UserRouter); //! This is the route that will be used to access the user routes (May error at first, but will be fixed in the next step)
+app.use('/api/campaigns', CampaignRouter);
+app.use('/api/notes', NoteRouter);
 
 // Error handling
 // Routes not found in App
