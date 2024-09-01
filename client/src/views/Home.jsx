@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import UserService from "../services/users.services";
 import { useContext } from "react";
 import TopNav from "../components/Navigation/TopNav";
+import AllCampaigns from "../components/AllCampaigns.jsx";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -25,6 +26,7 @@ const Home = () => {
                     Testing...Welcome, {user.firstName}
                 </h1>
             </div>
+            <AllCampaigns />
         </>
     );
 };
