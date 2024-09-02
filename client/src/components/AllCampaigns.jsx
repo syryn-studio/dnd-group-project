@@ -13,6 +13,9 @@ const AllCampaigns = () => {
     return (
         <>
             <h1>This component returns All Campaigns</h1>
+            <h2>Test git merge #1 <br/>
+                YEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+            </h2>
         </>
     )
 };
