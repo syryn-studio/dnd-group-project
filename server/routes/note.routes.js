@@ -3,11 +3,11 @@ import { Router } from "express";
 
 const NoteRouter = Router();
 
-NoteRouter.route("/notes")
+NoteRouter.route("/")
     .get(NoteController.getAll)
     .post(NoteController.createNew)
 
-NoteRouter.route("/notes/:id")
+NoteRouter.route("/:id")
     .get(NoteController.getOne)
     .put(NoteController.update)
     .delete(NoteController.delete)

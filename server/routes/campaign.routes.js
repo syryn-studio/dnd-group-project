@@ -3,11 +3,11 @@ import { Router } from "express";
 
 const CampaignRouter = Router();
 
-CampaignRouter.route("/campaigns")
+CampaignRouter.route("/")
     .get(CampaignController.getAll)
     .post(CampaignController.createNew)
 
-CampaignRouter.route("/campaigns/:id")
+CampaignRouter.route("/:id")
     .get(CampaignController.getOne)
     .put(CampaignController.update)
     .delete(CampaignController.delete)
