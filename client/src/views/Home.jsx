@@ -4,6 +4,8 @@ import UserService from "../services/users.services";
 import { useContext } from "react";
 import TopNav from "../components/Navigation/TopNav";
 import AllCampaigns from "../components/AllCampaigns.jsx";
+import CreateNewCampaign from "./CreateNewCampaign.jsx";
+import { Link } from "react-router-dom"
 
 const Home = () => {
     const navigate = useNavigate();
@@ -23,8 +25,11 @@ const Home = () => {
             <TopNav />
             <div>
                 <h1 className="text-4xl mt-8 ml-8">
-                    Testing...Welcome, {user.firstName}
+                    Welcome, {user.firstName}
                 </h1>
+            </div>
+            <div>
+                <button ><Link to={`/campaigns/create`}>Create A Campaign</Link></button>
             </div>
             <AllCampaigns />
         </>
