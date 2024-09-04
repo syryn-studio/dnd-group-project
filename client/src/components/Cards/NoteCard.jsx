@@ -8,39 +8,32 @@ const NoteCard = (props) => {
 
     return (
         <>
-            <div className="drop-shadow-lg">
-                <div className="card max-w-xs rounded-2xl bg-base-100 px-8 pb-8">
+            <Link to={`/notes/${note._id}`} className="">
+                <div className="card max-w-xs rounded-2xl bg-base-100 px-8 pb-8 drop-shadow-md">
                     <div className="mt-8">
                         <h1 className=" font-semibold text-lg">{note.title}</h1>
-                        <div className="absolute -top-4 -right-4">
-                            <div className="flex g-4">
-                                <p className="text-xs align-text-bottom">
-                                    {note.createdBy.firstName}
-                                </p>
+                        <div className="absolute -top-6 -right-5">
+                            <div className="flex items-end ">
+                                {user._id == note.createdBy._id ? (
+                                    <p className="text-xs font-bold text-primary pb-2">
+                                        You
+                                    </p>
+                                ) : (
+                                    <p className="text-xs ">
+                                        {note.createdBy.firstName}
+                                    </p>
+                                )}
                                 <img
-                                    className="rounded-full w-16 "
+                                    className="rounded-full w-16 border"
                                     src={note.createdBy.image}
                                     alt=""
                                 />
                             </div>
                         </div>
                         <p>{note.content}</p>
-                        <ul className="flex justify-center gap-4">
-                            <Link to={`/notes/${note._id}`}>View</Link>
-                            {user._id == note.createdBy._id ? (
-                                <>
-                                    <li>|</li>
-                                    <Link to={`/notes/update/${note._id}`}>
-                                        Edit
-                                    </Link>
-                                </>
-                            ) : (
-                                ""
-                            )}
-                        </ul>
                     </div>
                 </div>
-            </div>
+            </Link>
         </>
     );
 };

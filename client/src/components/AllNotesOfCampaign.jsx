@@ -18,7 +18,7 @@ const AllNotesOfCampaign = (props) => {
         <>
             <div>
                 {noteList.map((note, index) => (
-                    <div className="mb-8" key={index}>
+                    <div className="mb-10" key={index}>
                         {note.campaign._id === campaignId ? (
                             <NoteCard note={note} />
                         ) : (
