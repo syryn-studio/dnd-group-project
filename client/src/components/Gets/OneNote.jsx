@@ -17,8 +17,9 @@ const OneNote = () => {
     }, [id]);
 
     const deleteNote = () => {
+        const postDeleteID = note.campaign._id;
         NoteService.deleteNote(id).then(() => {
-            navigate("/home");
+            navigate(`/campaigns/${postDeleteID}`);
         });
     };
 
@@ -43,7 +44,11 @@ const OneNote = () => {
                             className="btn btn-primary w-24">
                             Edit
                         </Link>
-                        <button className="btn btn-primary w-24">Delete</button>
+                        <button
+                            onClick={deleteNote}
+                            className="btn btn-primary w-24">
+                            Delete
+                        </button>
                     </div>
                 </div>
             </div>

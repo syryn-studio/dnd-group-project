@@ -1,34 +1,34 @@
 import Note from '../models/note.model.js';
 
 const NoteController = {
-    "createNew": async (req, res) => {
+    "createNew": async (req, res, next) => {
         try {
             const newNote = await Note.create(req.body);
             res.json(newNote);
         } catch (error) {
             console.log(error);
-            res.status(400).json(error);
+            next(error);
         }
     },
-    "getAll": async (req, res) => {
+    "getAll": async (req, res, next) => {
         try {
             const allNotes = await Note.find().populate("createdBy").populate("campaign");
             res.json(allNotes);
         } catch (error) {
             console.log(error);
-            res.status(400).json(error);
+            next(error);
         }
     },
-    "getOne": async (req, res) => {
+    "getOne": async (req, res, next) => {
         try {
             const note = await Note.findById(req.params.id).populate("createdBy").populate("campaign");
             res.json(note);
         } catch (error) {
             console.log(error);
-            res.status(400).json(error);
+            next(error);
         }
     },
-    "update": async (req, res) => {
+    "update": async (req, res, next) => {
         try {
             const options = {
                 "new": true,
@@ -38,16 +38,16 @@ const NoteController = {
             res.json(updatedNote);
         } catch (error) {
             console.log(error);
-            res.status(400).json(error);
+            next(error);
         }
     },
-    "delete": async (req, res) => {
+    "delete": async (req, res, next) => {
         try {
             const deletedNote = await Note.findByIdAndDelete(req.params.id);
             res.json(deletedNote);
         } catch (error) {
             console.log(error);
-            res.status(400).json(error);
+            next(error);
         }
     },
     "getByUser": async (req, res, next) => {
