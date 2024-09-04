@@ -6,6 +6,8 @@ import Register from "./views/login_reg/Register";
 import CreateNewCampaign from "./views/CreateNewCampaign";
 import OneCampaign from "./views/OneCampaign";
 import EditCampaign from "./views/EditCampaign";
+import ViewOneNote from "./views/ViewOneNote";
+import EditNotePage from "./views/EditNotePage";
 
 function App() {
     return (
@@ -27,6 +29,11 @@ function App() {
                         <Route
                             path="/campaigns/:id/edit"
                             element={<EditCampaign />}
+                        />
+                        <Route path="/notes/:id" element={<ViewOneNote />} />
+                        <Route
+                            path="/notes/:id/edit"
+                            element={<EditNotePage />}
                         />
                     </Routes>
                 </LoggedInUserProvider>
