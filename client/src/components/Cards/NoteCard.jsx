@@ -12,12 +12,18 @@ const NoteCard = (props) => {
                 <div className="card max-w-xs rounded-2xl bg-base-100 px-8 pb-8">
                     <div className="mt-8">
                         <h1 className=" font-semibold text-lg">{note.title}</h1>
-                        <img
-                            className="rounded-full w-16 absolute -top-4 -right-4"
-                            src={note.createdBy.image}
-                            alt=""
-                        />
-                        <p>{note.createdBy.firstName}</p>
+                        <div className="absolute -top-4 -right-4">
+                            <div className="flex g-4">
+                                <p className="text-xs align-text-bottom">
+                                    {note.createdBy.firstName}
+                                </p>
+                                <img
+                                    className="rounded-full w-16 "
+                                    src={note.createdBy.image}
+                                    alt=""
+                                />
+                            </div>
+                        </div>
                         <p>{note.content}</p>
                         <ul className="flex justify-center gap-4">
                             <Link to={`/notes/${note._id}`}>View</Link>
