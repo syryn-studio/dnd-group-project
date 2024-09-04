@@ -6,10 +6,12 @@ import { LoggedInUserContext } from "../context/LoggedInUserContext.jsx";
 
 const EditCampaignForm = (props) => {
     const { user } = useContext(LoggedInUserContext);
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [image, setImage] = useState("");
-    const [campaignData, setCampaignData] = useState({});
+    const [campaignData, setCampaignData] = useState({
+        name: "",
+        description: "",
+        image: "",
+        createdBy: user._id,
+    });
 
     const {id} = useParams();
     const navigate = useNavigate();
@@ -24,33 +26,7 @@ const EditCampaignForm = (props) => {
             .catch((err)=> {console.log(err)})
     }, [id])
 
-
-    useEffect(()=> {
-        CampaignService.getOneCampaign(id)
-            .then((res)=>{
-                console.log(res.data);
-                setName(res.data.name);
-                setDescription(res.data.description);
-                setImage(res.data.image);
-            })
-            .catch((err)=> {console.log(err)})
-    }, [id])
-
-
-
-
-    const nameHandler = (e) => {
-        setName(e.target.value)
-    }
-
-    const descriptionHandler = (e) => {
-        setDescription(e.target.value)
-    }
-
-    const imageHandler = (e) => {
-        setImage(e.target.value)
-    }
-
+    
     const campaignChangeHandler = (e) => {
         const { name, value } = e.target;
         setCampaignData((prevCampaignData) => ({
