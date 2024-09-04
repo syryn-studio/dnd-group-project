@@ -7,10 +7,7 @@ import { LoggedInUserContext } from "../context/LoggedInUserContext.jsx";
 const EditCampaignForm = (props) => {
     const { user } = useContext(LoggedInUserContext);
     const [campaignData, setCampaignData] = useState({
-        name: "",
-        description: "",
-        image: "",
-        createdBy: user._id,
+        
     });
 
     const {id} = useParams();
@@ -20,13 +17,13 @@ const EditCampaignForm = (props) => {
     useEffect(()=> {
         CampaignService.getOneCampaign(id)
             .then((res)=>{
-                console.log(res.data);
-                setCampaignData(res.data);
+                console.log(res);
+                setCampaignData(res);
             })
             .catch((err)=> {console.log(err)})
     }, [id])
 
-    
+
     const campaignChangeHandler = (e) => {
         const { name, value } = e.target;
         setCampaignData((prevCampaignData) => ({
@@ -39,10 +36,7 @@ const EditCampaignForm = (props) => {
         e.preventDefault();
 
         CampaignService.updateCampaign(id, campaignData), {
-            name,
-            description,
-            image,
-            createdBy: user._id
+            campaignData
         }
             .then(res => {
                 console.log(res);
