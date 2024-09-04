@@ -9,31 +9,33 @@ const CampaignService = {
         try {
             const res = await http.post("/", campaignData)
             return res.data
-        } catch(err) { throw err }
+        } catch (err) { throw err }
     },
-    "getAllCampaigns": async () => {
+    "getAllCampaigns": async (user) => {
         try {
-            const res = await http.get("/")
-            return res.data
-        } catch(err) { throw err }
+            const endPoint = user ? `/user/${user}` : '/';
+            const response = await http.get(endPoint);
+            return response.data
+        }
+        catch (error) { throw error }
     },
     "getOneCampaign": async (id) => {
         try {
             const res = await http.get(`/${id}`)
             return res.data
-        } catch(err) { throw err }
+        } catch (err) { throw err }
     },
     "updateCampaign": async (id, data) => {
         try {
             const res = await http.put(`/${id}`, data)
             return res.data
-        } catch(err) { throw err }
+        } catch (err) { throw err }
     },
     "deleteCampaign": async (id) => {
         try {
             const res = await http.delete(`/${id}`)
             return res.data
-        } catch(err) { throw err }
+        } catch (err) { throw err }
     }
 }
 

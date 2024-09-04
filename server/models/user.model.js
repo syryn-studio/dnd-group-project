@@ -26,7 +26,12 @@ const UserSchema = new Schema(
             "type": String,
             "required": [true, "Password is required"],
             "minlength": [8, "Password must be at least 8 characters long"]
-        }
+        },
+        "image": {
+            "type": String,
+            "required": false,
+            "default": "https://dndgroupproject.s3.us-east-2.amazonaws.com/default_profile.jpg"
+        },
     },
     { "timestamps": true }
 )

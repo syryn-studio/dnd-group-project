@@ -13,7 +13,7 @@ const PORT = process.env.Port
 
 app.use(cookieParser(), express.json(), cors({ "credentials": true, "origin": "http://localhost:5173" }));
 dbConnect();
-app.use('/api/users', UserRouter); //! This is the route that will be used to access the user routes (May error at first, but will be fixed in the next step)
+app.use('/api/users', UserRouter);
 app.use('/api/campaigns', CampaignRouter);
 app.use('/api/notes', NoteRouter);
 
