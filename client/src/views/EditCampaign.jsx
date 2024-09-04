@@ -5,7 +5,7 @@ const EditCampaign = () => {
     return (
         <>
             <TopNav />
-            <h1>This is the page to Edit a Campaign</h1>
+            <h1>Edit</h1>
             <EditCampaignForm />
         </>
     )
