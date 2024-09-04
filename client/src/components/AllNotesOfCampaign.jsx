@@ -1,11 +1,10 @@
 import { useEffect, useState, useContext } from "react";
 import NoteService from "../services/note.services.js";
-import { LoggedInUserContext } from "../context/LoggedInUserContext";
+
 import NoteCard from "./Cards/NoteCard";
 
 const AllNotesOfCampaign = (props) => {
     const [noteList, setNoteList] = useState([]);
-    // const { user } = useContext(LoggedInUserContext);
     const { campaignId } = props;
 
     useEffect(() => {

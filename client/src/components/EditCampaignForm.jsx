@@ -6,7 +6,9 @@ import { LoggedInUserContext } from "../context/LoggedInUserContext.jsx";
 
 const EditCampaignForm = (props) => {
     const { user } = useContext(LoggedInUserContext);
-    const [campaignData, setCampaignData] = useState({});
+    const [campaignData, setCampaignData] = useState({
+        createdBy: { _id: "" },
+    });
 
     const { id } = useParams();
     const navigate = useNavigate();
@@ -49,58 +51,110 @@ const EditCampaignForm = (props) => {
 
     return (
         <>
-            <div>
-                <form onSubmit={(e) => submitHandler(e)}>
-                    {errors && <p className="text-red-500">{errors.name}</p>}
-                    <div>
-                        <label htmlFor="name">Name:</label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={campaignData.name}
-                            onChange={(e) => campaignChangeHandler(e)}
-                            id="name"
-                        />
-                        {errors.validationErrors && (
-                            <p className="text-red-400">
-                                {errors.validationErrors.name}
-                            </p>
+            <div className="flex justify-center mt-5">
+                {user._id === campaignData.createdBy._id ? (
+                    <form
+                        className="card bg-base-100 w-auto shadow-xl gap-2 px-4 py-8"
+                        onSubmit={(e) => submitHandler(e)}>
+                        {errors && (
+                            <p className="text-red-500">{errors.name}</p>
                         )}
-                    </div>
-                    <div>
-                        <label htmlFor="description">Description:</label>
-                        <input
-                            type="text"
-                            name="description"
+                        <h2 className="text-4xl ml-6 text-center font-unifraktur">
+                            Add Your Adventure
+                        </h2>
+                        <label
+                            htmlFor="name"
+                            className="input input-bordered flex items-center gap-2">
+                            Name:
+                            <input
+                                type="text"
+                                name="name"
+                                value={campaignData.name}
+                                onChange={(e) => campaignChangeHandler(e)}
+                                id="name"
+                            />
+                            {errors.validationErrors && (
+                                <p className="text-red-400">
+                                    {errors.validationErrors.name}
+                                </p>
+                            )}
+                        </label>
+                        <label
+                            htmlFor="heroText"
+                            className="input input-bordered flex items-center gap-2">
+                            Brief Synopsis:
+                            <input
+                                type="text"
+                                value={campaignData.heroText}
+                                name="heroText"
+                                id="heroText"
+                                onChange={(e) => campaignChangeHandler(e)}
+                            />
+                            {errors.validationErrors && (
+                                <p className="text-red-400">
+                                    {errors.validationErrors.heroText}
+                                </p>
+                            )}
+                        </label>
+
+                        <textarea
+                            className="textarea textarea-bordered textarea-lg w-full items-start min-h-96"
+                            placeholder="Detailed Description"
+                            type="textarea"
                             value={campaignData.description}
-                            onChange={(e) => campaignChangeHandler(e)}
+                            name="description"
                             id="description"
+                            onChange={(e) => campaignChangeHandler(e)}
                         />
+
                         {errors.validationErrors && (
                             <p className="text-red-400">
                                 {errors.validationErrors.description}
                             </p>
                         )}
-                    </div>
-                    <div>
-                        <label htmlFor="image">Image:</label>
-                        <input
-                            type="text"
-                            name="image"
-                            value={campaignData.image}
-                            onChange={(e) => campaignChangeHandler(e)}
-                            id="image"
-                        />
-                        {errors.validationErrors && (
-                            <p className="text-red-400">
-                                {errors.validationErrors.image}
-                            </p>
-                        )}
-                    </div>
-                    <button className="btn btn-primary" type="submit">
-                        Make Changes
-                    </button>
-                </form>
+                        <label
+                            htmlFor="image"
+                            className="input input-bordered flex items-center gap-2">
+                            Campaign Image:
+                            <input
+                                placeholder="URL only for now"
+                                type="text"
+                                value={campaignData.image}
+                                name="image"
+                                id="image"
+                                onChange={(e) => campaignChangeHandler(e)}
+                            />
+                            {errors.validationErrors && (
+                                <p className="text-red-400">
+                                    {errors.validationErrors.image}
+                                </p>
+                            )}
+                        </label>
+                        <label
+                            htmlFor="heroImage"
+                            className="input input-bordered flex items-center gap-2">
+                            Thumbnail Image:
+                            <input
+                                placeholder="URL only for now"
+                                type="text"
+                                value={campaignData.heroImage}
+                                name="heroImage"
+                                id="heroImage"
+                                onChange={(e) => campaignChangeHandler(e)}
+                            />
+                            {errors.validationErrors && (
+                                <p className="text-red-400">
+                                    {errors.validationErrors.heroImage}
+                                </p>
+                            )}
+                        </label>
+                        <button className="btn btn-primary" type="submit">
+                            Edit Campaign
+                        </button>
+                    </form>
+                ) : (
+                    <h1>Only the creator of this campaign can edit it.</h1>
+                )}
             </div>
         </>
     );

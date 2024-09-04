@@ -1,9 +1,10 @@
 import EditNoteForm from "../components/EditNoteForm";
+import TopNav from "../components/Navigation/TopNav";
 
 const EditNotePage = () => {
     return (
         <>
-            <h1>Note Page</h1>
+            <TopNav />
             <EditNoteForm />
         </>
     );

@@ -9,7 +9,7 @@ const NoteCard = (props) => {
     return (
         <>
             <Link to={`/notes/${note._id}`} className="">
-                <div className="card max-w-xs rounded-2xl bg-base-100 px-8 pb-8 drop-shadow-md">
+                <div className="card max-w-3xl rounded-2xl bg-base-100 px-8 pb-8 drop-shadow-md">
                     <div className="mt-8">
                         <h1 className=" font-semibold text-lg">{note.title}</h1>
                         <div className="absolute -top-6 -right-5">
@@ -30,7 +30,9 @@ const NoteCard = (props) => {
                                 />
                             </div>
                         </div>
-                        <p>{note.content}</p>
+                        <div className="text-wrap max-w-fit truncate">
+                            {note.content}
+                        </div>
                     </div>
                 </div>
             </Link>

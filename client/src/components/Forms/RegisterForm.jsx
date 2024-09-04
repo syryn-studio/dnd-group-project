@@ -177,6 +177,24 @@ const RegisterForm = () => {
                                 </p>
                             )}
                         </label>
+                        <label
+                            htmlFor="image"
+                            className="input input-bordered flex items-center gap-2">
+                            <input
+                                className="grow"
+                                type="text"
+                                placeholder="User Image: URL only for now"
+                                value={user.image}
+                                name="image"
+                                id="image"
+                                onChange={(e) => changeHandler(e)}
+                            />
+                            {errors.validationErrors && (
+                                <p className="text-red-400">
+                                    {errors.validationErrors.image}
+                                </p>
+                            )}
+                        </label>
                     </div>
                     <div className="pt-4 mb-10 flex justify-between">
                         <span className="text-sm text-white">

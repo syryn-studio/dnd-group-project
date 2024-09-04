@@ -5,10 +5,9 @@ const CreateNewCampaign = () => {
     return (
         <>
             <TopNav />
-            <h1>Add your Adventure!</h1>
             <NewCampaignForm />
         </>
-    )
+    );
 };
 
 export default CreateNewCampaign;

@@ -12,6 +12,9 @@ const NewCampaignForm = () => {
         name: "",
         description: "",
         image: "",
+        heroText: "",
+        heroImage: "",
+        players: [],
         createdBy: user._id,
     });
 
@@ -32,6 +35,9 @@ const NewCampaignForm = () => {
                     name: "",
                     description: "",
                     image: "",
+                    heroText: "",
+                    heroImage: "",
+                    players: [],
                     createdBy: "",
                 });
                 navigate("/home");
@@ -43,11 +49,18 @@ const NewCampaignForm = () => {
 
     return (
         <>
-            <div>
-                <form onSubmit={(e) => submitHandler(e)}>
+            <div className="flex justify-center mt-5">
+                <form
+                    className="card bg-base-100 w-auto shadow-xl gap-2 px-4 py-8"
+                    onSubmit={(e) => submitHandler(e)}>
                     {errors && <p className="text-red-500">{errors.name}</p>}
-                    <div>
-                        <label htmlFor="name">Name:</label>
+                    <h2 className="text-4xl ml-6 text-center font-unifraktur">
+                        Add Your Adventure
+                    </h2>
+                    <label
+                        htmlFor="name"
+                        className="input input-bordered flex items-center gap-2">
+                        Name:
                         <input
                             type="text"
                             name="name"
@@ -60,37 +73,76 @@ const NewCampaignForm = () => {
                                 {errors.validationErrors.name}
                             </p>
                         )}
-                    </div>
-                    <div>
-                        <label htmlFor="description">Description:</label>
+                    </label>
+                    <label
+                        htmlFor="heroText"
+                        className="input input-bordered flex items-center gap-2">
+                        Brief Synopsis:
                         <input
                             type="text"
-                            name="description"
-                            value={campaignData.description}
+                            value={campaignData.heroText}
+                            name="heroText"
+                            id="heroText"
                             onChange={(e) => campaignChangeHandler(e)}
-                            id="description"
                         />
                         {errors.validationErrors && (
                             <p className="text-red-400">
-                                {errors.validationErrors.description}
+                                {errors.validationErrors.heroText}
                             </p>
                         )}
-                    </div>
-                    <div>
-                        <label htmlFor="image">Image:</label>
+                    </label>
+
+                    <textarea
+                        className="textarea textarea-bordered textarea-lg w-full items-start"
+                        placeholder="Detailed Description"
+                        type="textarea"
+                        value={campaignData.description}
+                        name="description"
+                        id="description"
+                        onChange={(e) => campaignChangeHandler(e)}
+                    />
+
+                    {errors.validationErrors && (
+                        <p className="text-red-400">
+                            {errors.validationErrors.description}
+                        </p>
+                    )}
+                    <label
+                        htmlFor="image"
+                        className="input input-bordered flex items-center gap-2">
+                        Campaign Image:
                         <input
+                            placeholder="URL only for now"
                             type="text"
-                            name="image"
                             value={campaignData.image}
-                            onChange={(e) => campaignChangeHandler(e)}
+                            name="image"
                             id="image"
+                            onChange={(e) => campaignChangeHandler(e)}
                         />
                         {errors.validationErrors && (
                             <p className="text-red-400">
                                 {errors.validationErrors.image}
                             </p>
                         )}
-                    </div>
+                    </label>
+                    <label
+                        htmlFor="heroImage"
+                        className="input input-bordered flex items-center gap-2">
+                        Thumbnail Image:
+                        <input
+                            placeholder="URL only for now"
+                            type="text"
+                            value={campaignData.heroImage}
+                            name="heroImage"
+                            id="heroImage"
+                            onChange={(e) => campaignChangeHandler(e)}
+                        />
+                        {errors.validationErrors && (
+                            <p className="text-red-400">
+                                {errors.validationErrors.heroImage}
+                            </p>
+                        )}
+                    </label>
                     <button className="btn btn-primary" type="submit">
                         Add Campaign
                     </button>

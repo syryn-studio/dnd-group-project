@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { LoggedInUserContext } from "../../context/LoggedInUserContext";
 
 const PageOptions = (props) => {
-    const { title, creatable, navLink } = props;
-    const { isLoggedIn, user } = useContext(LoggedInUserContext);
+    const { title, creatable, navLink, campaignId } = props;
+
     return (
         <>
             <div className="navbar justify-between px-8 mt-8">

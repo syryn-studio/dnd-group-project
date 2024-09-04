@@ -5,10 +5,9 @@ const EditCampaign = () => {
     return (
         <>
             <TopNav />
-            <h1>Edit</h1>
             <EditCampaignForm />
         </>
-    )
+    );
 };
 
 export default EditCampaign;

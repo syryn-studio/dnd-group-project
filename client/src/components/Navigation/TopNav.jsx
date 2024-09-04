@@ -36,11 +36,6 @@ const TopNav = () => {
                                 Home
                             </Link>
                         </li>
-                        <li>
-                            <p className="font-unifraktur text-3xl">
-                                My Campaigns
-                            </p>
-                        </li>
 
                         <>
                             <li> </li>

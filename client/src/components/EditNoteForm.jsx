@@ -33,26 +33,35 @@ const EditNoteForm = () => {
 
     return (
         <>
-            <form onSubmit={(e) => submitHandler(e)}>
-                <h2>Edit Note</h2>
-                <label htmlFor="title">
-                    <input
-                        type="text"
-                        value={note.title}
-                        name="title"
-                        id="title"
+            <div className="flex justify-center mt-16">
+                <form
+                    className="card bg-base-100 shadow-xl gap-2 px-4 py-8 "
+                    onSubmit={(e) => submitHandler(e)}>
+                    <h2 className="text-2xl ml-6 text-center">Edit Note</h2>
+                    <label
+                        htmlFor="title"
+                        className="input input-bordered flex items-center gap-2">
+                        <input
+                            type="text"
+                            value={note.title}
+                            name="title"
+                            id="title"
+                            onChange={(e) => changeHandler(e)}
+                        />
+                    </label>
+                    <textarea
+                        className="textarea textarea-bordered textarea-lg w-full min-h-40 min-w-96"
+                        type="textarea"
+                        value={note.content}
+                        name="content"
+                        id="content"
                         onChange={(e) => changeHandler(e)}
                     />
-                </label>
-                <textarea
-                    type="textarea"
-                    value={note.content}
-                    name="content"
-                    id="content"
-                    onChange={(e) => changeHandler(e)}
-                />
-                <button className="btn btn-primary">Submit</button>
-            </form>
+                    <div className="flex justify-center">
+                        <button className="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
         </>
     );
 };
