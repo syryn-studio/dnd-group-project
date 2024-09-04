@@ -1,25 +1,24 @@
-import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState, useContext } from "react";
 import NoteService from "../services/note.services.js";
-import CampaignService from "../services/campaign.services";
-import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { LoggedInUserContext } from "../context/LoggedInUserContext.jsx";
 
-const NewNoteForm = ({campaignId}) => {
+const NewNoteForm = (props) => {
     const navigate = useNavigate();
+    const { campaignId } = props;
     const { user } = useContext(LoggedInUserContext);
     const [errors, setErrors] = useState({});
-    const [noteData, setNoteData] = useState({
-        title:"",
-        content:"",
-        campaign:"",
-        createdBy:user._id
+    const [note, setNote] = useState({
+        title: "",
+        content: "",
+        campaign: campaignId,
+        createdBy: user,
     });
-    
-    const noteChangeHandler = (e) => {
+
+    const changeHandler = (e) => {
         const { name, value } = e.target;
-        setNoteData((prevNoteData) => ({
-            ...prevNoteData,
+        setNote((prevNote) => ({
+            ...prevNote,
             [name]: value,
         }));
     };
@@ -27,63 +26,70 @@ const NewNoteForm = ({campaignId}) => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        NoteService.createNewNote(noteData)
+        NoteService.createNewNote(note)
             .then(() => {
-                setNoteData({
+                setNote({
                     title: "",
                     content: "",
-                    campaign: "",
-                    createdBy: "",
+                    campaign: campaignId,
+                    user: user,
                 });
-                navigate("/home");
+                navigate(0);
             })
             .catch((err) => {
                 setErrors(err.response.data);
             });
-    } ;
+    };
 
     return (
         <>
             <div>
-                <form onSubmit={(e) => submitHandler(e)} >
-                {errors && <p className="text-red-500">{errors.name}</p>}
-                    <div>
-                        <label htmlFor="title">Title:</label>
+                <form
+                    className="card bg-base-100 w-auto shadow-xl gap-2 px-4 py-8"
+                    onSubmit={(e) => submitHandler(e)}>
+                    {errors && <p className="text-red-500">{errors.name}</p>}
+                    <h2 className="text-2xl ml-6 text-center">Create a Note</h2>
+                    <label
+                        htmlFor="title"
+                        className="input input-bordered flex items-center gap-2">
+                        Note Title:
                         <input
                             type="text"
+                            value={note.title}
                             name="title"
-                            value={noteData.title}
-                            onChange={(e) => noteChangeHandler(e)}
                             id="title"
+                            onChange={(e) => changeHandler(e)}
                         />
                         {errors.validationErrors && (
                             <p className="text-red-400">
                                 {errors.validationErrors.title}
                             </p>
                         )}
+                    </label>
+                    <textarea
+                        className="textarea textarea-bordered textarea-lg w-full"
+                        placeholder="Content"
+                        type="textarea"
+                        value={note.content}
+                        name="content"
+                        id="content"
+                        onChange={(e) => changeHandler(e)}
+                    />
+                    {errors.validationErrors && (
+                        <p className="text-red-400">
+                            {errors.validationErrors.content}
+                        </p>
+                    )}
+
+                    <div className="flex justify-center">
+                        <button type="submit" className="btn btn-primary">
+                            Create Note
+                        </button>
                     </div>
-                    <div>
-                        <label htmlFor="content">Content:</label>
-                        <input
-                            type="text"
-                            name="content"
-                            value={noteData.content}
-                            onChange={(e) => noteChangeHandler(e)}
-                            id="content"
-                        />
-                        {errors.validationErrors && (
-                            <p className="text-red-400">
-                                {errors.validationErrors.content}
-                            </p>
-                        )}
-                    </div>
-                    <button className="btn btn-primary" type="submit">
-                        Add Note
-                    </button>
                 </form>
             </div>
         </>
-    )
+    );
 };
 
 export default NewNoteForm;

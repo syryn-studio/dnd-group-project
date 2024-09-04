@@ -11,14 +11,15 @@ const NoteSchema = new Schema({
         required: [true, "Content is required"],
         minlength: [2, "Content must be at least 2 characters long"]
     },
-    campaign: {
-        type: String,
-        required: [true, "Campaign ID is required"]
-    },
     createdBy: {
-        type: String,
-        required: [true, "User ID is required"]
-    }
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'User',
+    },
+    campaign: {
+        type: Schema.Types.ObjectId,
+        ref: 'Campaign',
+    },
 })
 const Note = model('Note', NoteSchema);
 export default Note;
