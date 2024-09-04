@@ -8,6 +8,8 @@ import OneCampaign from "./views/OneCampaign";
 import EditCampaign from "./views/EditCampaign";
 import ViewOneNote from "./views/ViewOneNote";
 import EditNotePage from "./views/EditNotePage";
+import NotFoundError from "./views/Errors/NotFoundError";
+import TopNav from "./components/Navigation/TopNav";
 
 function App() {
     return (
@@ -35,6 +37,7 @@ function App() {
                             path="/notes/:id/edit"
                             element={<EditNotePage />}
                         />
+                        <Route path="*" element={<NotFoundError />} />
                     </Routes>
                 </LoggedInUserProvider>
             </BrowserRouter>
