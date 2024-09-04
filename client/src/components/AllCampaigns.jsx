@@ -12,10 +12,16 @@ const AllCampaigns = () => {
 
     return (
         <>
-            <h1>This component returns All Campaigns</h1>
-            <h2>Test git merge #1 <br/>
-                YEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-            </h2>
+        <h1>Choose A Campaign</h1>
+        {
+        campaignList.map((campaign, index) => (
+        <div key={index} className="Campaign card">
+            <div className="Card title"><Link to={`/campaigns/${campaign._id}`}>{campaign.name}</Link></div>
+            <div className="Card description">{campaign.description}</div>
+            <div className="Card image">{campaign.image}</div>
+        </div>
+        ))
+        }
         </>
     )
 };
