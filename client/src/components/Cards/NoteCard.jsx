@@ -29,7 +29,6 @@ const NoteCard = (props) => {
                             <Link to={`/notes/${note._id}`}>View</Link>
                             {user._id == note.createdBy._id ? (
                                 <>
-                                    ertyertyerty
                                     <li>|</li>
                                     <Link to={`/notes/update/${note._id}`}>
                                         Edit
