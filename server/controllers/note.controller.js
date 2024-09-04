@@ -5,25 +5,25 @@ const NoteController = {
         try {
             const newNote = await Note.create(req.body);
             res.json(newNote);
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(400).json(error);
         }
     },
     "getAll": async (req, res) => {
         try {
-            const allNotes = await Note.find();
+            const allNotes = await Note.find().populate("createdBy").populate("campaign");
             res.json(allNotes);
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(400).json(error);
         }
     },
     "getOne": async (req, res) => {
         try {
-            const note = await Note.findById(req.params.id);
+            const note = await Note.findById(req.params.id).populate("createdBy").populate("campaign");
             res.json(note);
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(400).json(error);
         }
@@ -34,9 +34,9 @@ const NoteController = {
                 "new": true,
                 "runValidators": true
             };
-            const updatedNote = await Note.findByIdAndUpdate(req.params.id, req.body, options);
+            const updatedNote = await Note.findByIdAndUpdate(req.params.id, req.body, options).populate("createdBy").populate("campaign");
             res.json(updatedNote);
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(400).json(error);
         }
@@ -45,9 +45,27 @@ const NoteController = {
         try {
             const deletedNote = await Note.findByIdAndDelete(req.params.id);
             res.json(deletedNote);
-        } catch(error) {
+        } catch (error) {
             console.log(error);
             res.status(400).json(error);
+        }
+    },
+    "getByUser": async (req, res, next) => {
+        const filter = { user: req.params.id };
+        try {
+            const notes = await Note.find(filter).populate("createdBy").populate("campaign")
+            res.json(notes);
+        } catch (err) {
+            next(err);
+        }
+    },
+    "getByCampaign": async (req, res, next) => {
+        const filter = { campaign: req.params.id };
+        try {
+            const notes = await Note.find(filter).populate("createdBy").populate("campaign")
+            res.json(notes);
+        } catch (err) {
+            next(err);
         }
     }
 }

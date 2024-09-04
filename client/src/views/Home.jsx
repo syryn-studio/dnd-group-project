@@ -4,6 +4,7 @@ import UserService from "../services/users.services";
 import { useContext } from "react";
 import TopNav from "../components/Navigation/TopNav";
 import AllCampaigns from "../components/AllCampaigns.jsx";
+import PageOptions from "../components/Navigation/PageOptions.jsx";
 import CreateNewCampaign from "./CreateNewCampaign.jsx";
 import { Link } from "react-router-dom";
 
@@ -23,12 +24,16 @@ const Home = () => {
     return (
         <>
             <TopNav />
-            <div>
-                <button>
-                    <Link to={`/campaigns/create`}>Create A Campaign</Link>
-                </button>
+            <PageOptions
+                title="Choose Your Campaign"
+                creatable="New Campaign"
+                navLink="/campaigns/create"
+            />
+            <div className="m-8">
+                <div className="flex justify-between flex-wrap gap-8">
+                    <AllCampaigns />
+                </div>
             </div>
-            <AllCampaigns />
         </>
     );
 };

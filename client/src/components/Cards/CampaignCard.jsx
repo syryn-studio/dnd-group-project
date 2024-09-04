@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { LoggedInUserContext } from "../../context/LoggedInUserContext";
-import UserIcon from "../UserIcon";
+import UserIcon from "../Assets/UserIcon";
 
 const CampaignCard = (props) => {
     const { campaign } = props;
@@ -23,7 +23,7 @@ const CampaignCard = (props) => {
                             zIndex: "-1",
                         }}></div>
                     <div
-                        className="text-left shadow-xl p-8 pb-6 rounded-2xl min-w-[569px]"
+                        className="text-left  p-8 pb-6 rounded-2xl min-w-[569px]"
                         style={{ zIndex: "-1" }}>
                         <h1 className="mb-5 text-3xl font-bold font-unifraktur text-white">
                             {campaign.name}
