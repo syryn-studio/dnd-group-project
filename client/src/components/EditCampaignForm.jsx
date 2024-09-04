@@ -6,23 +6,22 @@ import { LoggedInUserContext } from "../context/LoggedInUserContext.jsx";
 
 const EditCampaignForm = (props) => {
     const { user } = useContext(LoggedInUserContext);
-    const [campaignData, setCampaignData] = useState({
-        
-    });
+    const [campaignData, setCampaignData] = useState({});
 
-    const {id} = useParams();
+    const { id } = useParams();
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
 
-    useEffect(()=> {
+    useEffect(() => {
         CampaignService.getOneCampaign(id)
-            .then((res)=>{
+            .then((res) => {
                 console.log(res);
                 setCampaignData(res);
             })
-            .catch((err)=> {console.log(err)})
-    }, [id])
-
+            .catch((err) => {
+                console.log(err);
+            });
+    }, [id]);
 
     const campaignChangeHandler = (e) => {
         const { name, value } = e.target;
@@ -35,25 +34,22 @@ const EditCampaignForm = (props) => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        CampaignService.updateCampaign(id, campaignData), {
-            campaignData
-        }
-            .then(res => {
+        CampaignService.updateCampaign(id, campaignData)
+            .then((res) => {
                 console.log(res);
                 console.log(res.data);
-                navigate("/home")
+                navigate("/home");
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
                 console.log(err.response.data.errors);
-                setErrors(err.response.data.errors)
-            })
-    }
-
+                setErrors(err.response.data.errors);
+            });
+    };
 
     return (
         <>
-                <div>
+            <div>
                 <form onSubmit={(e) => submitHandler(e)}>
                     {errors && <p className="text-red-500">{errors.name}</p>}
                     <div>
@@ -106,8 +102,8 @@ const EditCampaignForm = (props) => {
                     </button>
                 </form>
             </div>
-        </> 
-    )
+        </>
+    );
 };
 
 export default EditCampaignForm;
